@@ -1,0 +1,2180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfect Proof - Our Services</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .service-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .sub-service-item {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .sub-service-item:hover {
+            transform: translateX(8px);
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .icon-container {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            border-radius: 16px;
+            padding: 16px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .nav-link.active {
+            color: #3b82f6 !important;
+            border-bottom: 2px solid #3b82f6;
+        }
+
+        .hero-bg {
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23ffffff" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .glow-effect {
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+        }
+
+        .text-glow {
+            text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+        }
+
+        .hero-banner {
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-banner::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 100%);
+        }
+
+        .hero-banner-content {
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Sub-service specific hero backgrounds */
+        .hero-functionality {
+            background: linear-gradient(135deg, rgba(147, 51, 234, 0.8) 0%, rgba(79, 70, 229, 0.8) 100%), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300"><rect width="800" height="300" fill="%23000"/><g fill="%23333"><rect x="50" y="50" width="200" height="150" rx="10"/><rect x="300" y="50" width="200" height="150" rx="10"/><rect x="550" y="50" width="200" height="150" rx="10"/></g><g fill="%23666"><circle cx="150" cy="100" r="20"/><circle cx="400" cy="100" r="20"/><circle cx="650" cy="100" r="20"/></g><g fill="%23999"><rect x="100" y="140" width="100" height="10" rx="5"/><rect x="350" y="140" width="100" height="10" rx="5"/><rect x="600" y="140" width="100" height="10" rx="5"/></g></svg>');
+        }
+
+        .hero-compatibility {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.8) 0%, rgba(29, 78, 216, 0.8) 100%), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300"><rect width="800" height="300" fill="%23000"/><g fill="%23333"><rect x="100" y="80" width="120" height="80" rx="10"/><rect x="250" y="60" width="80" height="120" rx="15"/><rect x="360" y="70" width="100" height="100" rx="50"/><rect x="490" y="50" width="140" height="90" rx="20"/></g><text x="400" y="250" text-anchor="middle" fill="%23666" font-family="Arial" font-size="24">Multi-Platform Testing</text></svg>');
+        }
+
+        .hero-performance {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.8) 0%, rgba(8, 145, 178, 0.8) 100%), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300"><rect width="800" height="300" fill="%23000"/><g fill="%23333"><path d="M100 200 L200 150 L300 100 L400 80 L500 60 L600 40 L700 20" stroke="%23666" stroke-width="4" fill="none"/><circle cx="200" cy="150" r="8" fill="%23999"/><circle cx="400" cy="80" r="8" fill="%23999"/><circle cx="600" cy="40" r="8" fill="%23999"/></g><text x="400" y="250" text-anchor="middle" fill="%23666" font-family="Arial" font-size="24">Performance Metrics</text></svg>');
+        }
+
+        .hero-automation {
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.8) 0%, rgba(219, 39, 119, 0.8) 100%), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300"><rect width="800" height="300" fill="%23000"/><g fill="%23333"><rect x="100" y="100" width="600" height="100" rx="10"/><rect x="120" y="120" width="50" height="60" rx="5"/><rect x="190" y="120" width="50" height="60" rx="5"/><rect x="260" y="120" width="50" height="60" rx="5"/><rect x="330" y="120" width="50" height="60" rx="5"/><rect x="400" y="120" width="50" height="60" rx="5"/><rect x="470" y="120" width="50" height="60" rx="5"/><rect x="540" y="120" width="50" height="60" rx="5"/><rect x="610" y="120" width="50" height="60" rx="5"/></g><text x="400" y="250" text-anchor="middle" fill="%23666" font-family="Arial" font-size="24">Automated Testing Pipeline</text></svg>');
+        }
+
+        .hero-api {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.8) 0%, rgba(21, 128, 61, 0.8) 100%), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300"><rect width="800" height="300" fill="%23000"/><g fill="%23333"><rect x="150" y="80" width="100" height="140" rx="10"/><rect x="550" y="80" width="100" height="140" rx="10"/><path d="M250 150 Q400 100 550 150" stroke="%23666" stroke-width="6" fill="none"/><circle cx="400" cy="125" r="15" fill="%23666"/></g><text x="400" y="250" text-anchor="middle" fill="%23666" font-family="Arial" font-size="24">API Integration Testing</text></svg>');
+        }
+
+        .hero-usability {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.8) 0%, rgba(124, 58, 237, 0.8) 100%), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300"><rect width="800" height="300" fill="%23000"/><g fill="%23333"><rect x="200" y="60" width="400" height="180" rx="20"/><rect x="220" y="80" width="360" height="20" rx="10"/><rect x="220" y="120" width="150" height="15" rx="7"/><rect x="220" y="150" width="200" height="15" rx="7"/><rect x="220" y="180" width="100" height="15" rx="7"/><circle cx="500" cy="160" r="30" fill="%23666"/></g><text x="400" y="270" text-anchor="middle" fill="%23666" font-family="Arial" font-size="24">User Experience Testing</text></svg>');
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .benefit-item {
+            transition: all 0.3s ease;
+        }
+
+        .benefit-item:hover {
+            transform: translateY(-4px);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b border-gray-200 fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center cursor-pointer" onclick="showPage('home')">
+                    <div class="icon-container mr-3">
+                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                    </div>
+                    <span class="text-2xl font-bold text-gray-900">Perfect Proof</span>
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#" class="nav-link text-gray-600 hover:text-blue-600 font-medium transition-colors" onclick="showPage('home')">Home</a>
+                    <a href="#" class="nav-link text-gray-600 hover:text-blue-600 font-medium transition-colors" onclick="showPage('services')">Services</a>
+                    <a href="#" class="nav-link text-gray-600 hover:text-blue-600 font-medium transition-colors" onclick="showPage('careers')">Careers</a>
+                    <a href="#" class="nav-link text-gray-600 hover:text-blue-600 font-medium transition-colors" onclick="showPage('about')">About Us</a>
+                    <a href="#" class="nav-link text-gray-600 hover:text-blue-600 font-medium transition-colors" onclick="showPage('contact')">Get in Touch</a>
+                </nav>
+                <div class="md:hidden">
+                    <button class="text-gray-600 hover:text-blue-600">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- HOME PAGE -->
+    <div id="home" class="page active">
+        <div class="pt-16">
+            <!-- Hero Section -->
+            <section class="hero-bg py-20 px-4 relative">
+                <div class="max-w-7xl mx-auto text-center relative z-10">
+                    <h1 class="text-5xl md:text-7xl font-bold text-white mb-6">
+                        Perfect <span class="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent text-glow">Proof</span>
+                    </h1>
+                    <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-4xl mx-auto">
+                        Professional QA testing services for games and software. We ensure your products launch flawlessly with comprehensive testing solutions.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+                        <button class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-4 rounded-xl font-semibold transition-all transform hover:scale-105 shadow-lg glow-effect" onclick="showPage('contact')">
+                            Get Free Quote
+                        </button>
+                        <button class="border-2 border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-gray-900 px-8 py-4 rounded-xl font-semibold transition-all" onclick="showPage('services')">
+                            View Services
+                        </button>
+                    </div>
+                    
+                    <!-- Floating Elements -->
+                    <div class="absolute top-20 left-10 floating-element">
+                        <div class="w-16 h-16 bg-gradient-to-br from-purple-500/30 to-pink-500/30 rounded-full glow-effect"></div>
+                    </div>
+                    <div class="absolute top-40 right-20 floating-element" style="animation-delay: -2s;">
+                        <div class="w-12 h-12 bg-gradient-to-br from-cyan-500/30 to-blue-500/30 rounded-full glow-effect"></div>
+                    </div>
+                    <div class="absolute bottom-20 left-1/4 floating-element" style="animation-delay: -4s;">
+                        <div class="w-8 h-8 bg-gradient-to-br from-green-500/30 to-teal-500/30 rounded-full glow-effect"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Services Overview -->
+            <section class="py-20 px-4 bg-gray-50">
+                <div class="max-w-7xl mx-auto">
+                    <div class="text-center mb-16">
+                        <h2 class="text-4xl font-bold text-gray-900 mb-4">Our Testing Services</h2>
+                        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                            Comprehensive quality assurance solutions for games and software applications
+                        </p>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <!-- Game QA Testing -->
+                        <div class="service-card bg-white p-8 rounded-xl shadow-lg border border-gray-200 hover:shadow-xl">
+                            <div class="flex items-center mb-6">
+                                <div class="text-5xl mr-4">🎮</div>
+                                <div>
+                                    <h3 class="text-2xl font-bold text-gray-900 mb-2">Game QA Testing</h3>
+                                    <p class="text-gray-600">Complete testing for all gaming platforms</p>
+                                </div>
+                            </div>
+                            
+                            <p class="text-gray-700 mb-6">
+                                Ensure your game delivers exceptional player experiences with our specialized testing services covering functionality, compatibility, and performance.
+                            </p>
+
+                            <div class="space-y-3 mb-6">
+                                <div class="flex items-center text-gray-700">
+                                    <div class="text-lg mr-3">⚙️</div>
+                                    <span>Functionality Testing</span>
+                                </div>
+                                <div class="flex items-center text-gray-700">
+                                    <div class="text-lg mr-3">🔄</div>
+                                    <span>Compatibility Testing</span>
+                                </div>
+                                <div class="flex items-center text-gray-700">
+                                    <div class="text-lg mr-3">⚡</div>
+                                    <span>Performance Testing</span>
+                                </div>
+                            </div>
+
+                            <button class="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white py-3 rounded-lg font-semibold transition-all" onclick="showPage('services')">
+                                Learn More
+                            </button>
+                        </div>
+
+                        <!-- Software QA Testing -->
+                        <div class="service-card bg-white p-8 rounded-xl shadow-lg border border-gray-200 hover:shadow-xl">
+                            <div class="flex items-center mb-6">
+                                <div class="text-5xl mr-4">💻</div>
+                                <div>
+                                    <h3 class="text-2xl font-bold text-gray-900 mb-2">Software QA Testing</h3>
+                                    <p class="text-gray-600">Complete software validation and QA</p>
+                                </div>
+                            </div>
+                            
+                            <p class="text-gray-700 mb-6">
+                                Comprehensive testing for web applications, mobile apps, and desktop software to ensure reliability and user satisfaction.
+                            </p>
+
+                            <div class="space-y-3 mb-6">
+                                <div class="flex items-center text-gray-700">
+                                    <div class="text-lg mr-3">🤖</div>
+                                    <span>Automation Testing</span>
+                                </div>
+                                <div class="flex items-center text-gray-700">
+                                    <div class="text-lg mr-3">🔗</div>
+                                    <span>API Testing</span>
+                                </div>
+                                <div class="flex items-center text-gray-700">
+                                    <div class="text-lg mr-3">👥</div>
+                                    <span>Usability Testing</span>
+                                </div>
+                            </div>
+
+                            <button class="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white py-3 rounded-lg font-semibold transition-all" onclick="showPage('services')">
+                                Learn More
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Why Choose Us -->
+            <section class="py-20 px-4 bg-white">
+                <div class="max-w-7xl mx-auto">
+                    <div class="text-center mb-16">
+                        <h2 class="text-4xl font-bold text-gray-900 mb-4">Why Choose Perfect Proof?</h2>
+                        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                            We deliver exceptional quality assurance with proven results
+                        </p>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="text-center p-6">
+                            <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl text-white">🏆</div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Industry Expertise</h3>
+                            <p class="text-gray-600">Over 500 games and applications tested with 99% client satisfaction rate</p>
+                        </div>
+
+                        <div class="text-center p-6">
+                            <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl text-white">⚡</div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Fast Turnaround</h3>
+                            <p class="text-gray-600">Rapid testing cycles that keep your development on schedule</p>
+                        </div>
+
+                        <div class="text-center p-6">
+                            <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-teal-500 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl text-white">🔧</div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Comprehensive Reports</h3>
+                            <p class="text-gray-600">Detailed bug reports with reproduction steps and priority levels</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Stats Section -->
+            <section class="py-20 px-4 bg-gradient-to-r from-purple-900 via-blue-900 to-cyan-900">
+                <div class="max-w-7xl mx-auto">
+                    <div class="text-center mb-16">
+                        <h2 class="text-4xl font-bold text-white mb-4">Proven Track Record</h2>
+                        <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                            Numbers that speak to our commitment to quality
+                        </p>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-4 gap-8 text-center">
+                        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                            <div class="text-4xl font-bold text-cyan-400 mb-2">500+</div>
+                            <div class="text-gray-300">Projects Completed</div>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                            <div class="text-4xl font-bold text-purple-400 mb-2">99%</div>
+                            <div class="text-gray-300">Client Satisfaction</div>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                            <div class="text-4xl font-bold text-pink-400 mb-2">24/7</div>
+                            <div class="text-gray-300">Support Available</div>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                            <div class="text-4xl font-bold text-green-400 mb-2">6</div>
+                            <div class="text-gray-300">Years Experience</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Testimonials -->
+            <section class="py-20 px-4 bg-gray-50">
+                <div class="max-w-7xl mx-auto">
+                    <div class="text-center mb-16">
+                        <h2 class="text-4xl font-bold text-gray-900 mb-4">What Our Clients Say</h2>
+                        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                            Real feedback from developers who trust Perfect Proof
+                        </p>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold mr-4">JD</div>
+                                <div>
+                                    <div class="font-semibold text-gray-900">John Davis</div>
+                                    <div class="text-gray-600 text-sm">Indie Game Developer</div>
+                                </div>
+                            </div>
+                            <p class="text-gray-700 italic">
+                                "Perfect Proof helped us launch our game bug-free. Their attention to detail and comprehensive testing saved us from potential disasters. Highly recommended!"
+                            </p>
+                            <div class="flex text-yellow-400 mt-4">
+                                ⭐⭐⭐⭐⭐
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-white font-bold mr-4">SM</div>
+                                <div>
+                                    <div class="font-semibold text-gray-900">Sarah Miller</div>
+                                    <div class="text-gray-600 text-sm">Product Manager</div>
+                                </div>
+                            </div>
+                            <p class="text-gray-700 italic">
+                                "The team at Perfect Proof is incredibly professional and thorough. They caught issues we never would have found on our own. Our app is now performing flawlessly."
+                            </p>
+                            <div class="flex text-yellow-400 mt-4">
+                                ⭐⭐⭐⭐⭐
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-teal-500 rounded-full flex items-center justify-center text-white font-bold mr-4">MR</div>
+                                <div>
+                                    <div class="font-semibold text-gray-900">Mike Rodriguez</div>
+                                    <div class="text-gray-600 text-sm">Studio Director</div>
+                                </div>
+                            </div>
+                            <p class="text-gray-700 italic">
+                                "Working with Perfect Proof was a game-changer for our studio. Their expertise in mobile testing helped us reach a much wider audience successfully."
+                            </p>
+                            <div class="flex text-yellow-400 mt-4">
+                                ⭐⭐⭐⭐⭐
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA Section -->
+            <section class="py-20 px-4 bg-gradient-to-r from-purple-900 via-blue-900 to-cyan-900">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h2 class="text-4xl font-bold text-white mb-6">Ready to Perfect Your Product?</h2>
+                    <p class="text-xl text-gray-300 mb-8">
+                        Join hundreds of satisfied developers who trust Perfect Proof for their QA needs. 
+                        Get started with a free consultation today.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <button class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-4 rounded-xl font-semibold transition-all transform hover:scale-105 shadow-lg glow-effect" onclick="showPage('contact')">
+                            Get Free Quote
+                        </button>
+                        <button class="border-2 border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-gray-900 px-8 py-4 rounded-xl font-semibold transition-all" onclick="showPage('services')">
+                            View All Services
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- SERVICES PAGE -->
+    <div id="services" class="page">
+        <div class="pt-16">
+            <!-- Hero Header -->
+            <section class="hero-bg py-20 px-4 relative">
+                <div class="max-w-7xl mx-auto text-center relative z-10">
+                    <h1 class="text-5xl md:text-6xl font-bold text-white mb-6">
+                        Our <span class="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent text-glow">Services</span>
+                    </h1>
+                    <p class="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto">
+                        Comprehensive quality assurance solutions designed to perfect your games and software. 
+                        From functionality testing to performance optimization, we ensure flawless user experiences.
+                    </p>
+                </div>
+                
+                <!-- Floating Elements -->
+                <div class="absolute top-20 left-10 floating-element">
+                    <div class="w-16 h-16 bg-gradient-to-br from-purple-500/30 to-pink-500/30 rounded-full glow-effect"></div>
+                </div>
+                <div class="absolute top-40 right-20 floating-element" style="animation-delay: -2s;">
+                    <div class="w-12 h-12 bg-gradient-to-br from-cyan-500/30 to-blue-500/30 rounded-full glow-effect"></div>
+                </div>
+                <div class="absolute bottom-20 left-1/4 floating-element" style="animation-delay: -4s;">
+                    <div class="w-8 h-8 bg-gradient-to-br from-green-500/30 to-teal-500/30 rounded-full glow-effect"></div>
+                </div>
+            </section>
+
+            <!-- Services Grid -->
+            <section class="py-20 px-4 bg-gray-50">
+                <div class="max-w-7xl mx-auto">
+                    <div class="grid lg:grid-cols-2 gap-12">
+                        <!-- Game QA Testing -->
+                        <div class="service-card bg-white p-8 rounded-xl shadow-lg border border-gray-200 hover:shadow-xl">
+                            <div class="flex items-center mb-6">
+                                <div class="text-5xl mr-4">🎮</div>
+                                <div>
+                                    <h2 class="text-3xl font-bold text-gray-900 mb-2">Game QA Testing</h2>
+                                    <p class="text-gray-600">Comprehensive testing solutions for all gaming platforms</p>
+                                </div>
+                            </div>
+                            
+                            <p class="text-gray-700 mb-6 text-lg">
+                                Ensure your game delivers exceptional player experiences across all platforms with our specialized game testing services.
+                            </p>
+
+                            <div class="space-y-3 mb-6">
+                                <div class="sub-service-item p-4 rounded-lg border border-gray-200 hover:border-purple-400/40 hover:bg-purple-50" onclick="showSubService('functionality')">
+                                    <div class="flex items-center">
+                                        <div class="text-2xl mr-3">⚙️</div>
+                                        <div>
+                                            <h3 class="text-lg font-semibold text-gray-900">Functionality Testing</h3>
+                                            <p class="text-gray-600 text-sm">Core gameplay mechanics and feature validation</p>
+                                        </div>
+                                        <div class="ml-auto text-purple-600">→</div>
+                                    </div>
+                                </div>
+
+                                <div class="sub-service-item p-4 rounded-lg border border-gray-200 hover:border-purple-400/40 hover:bg-purple-50" onclick="showSubService('compatibility')">
+                                    <div class="flex items-center">
+                                        <div class="text-2xl mr-3">🔄</div>
+                                        <div>
+                                            <h3 class="text-lg font-semibold text-gray-900">Compatibility Testing</h3>
+                                            <p class="text-gray-600 text-sm">Multi-platform and device compatibility validation</p>
+                                        </div>
+                                        <div class="ml-auto text-purple-600">→</div>
+                                    </div>
+                                </div>
+
+                                <div class="sub-service-item p-4 rounded-lg border border-gray-200 hover:border-purple-400/40 hover:bg-purple-50" onclick="showSubService('performance')">
+                                    <div class="flex items-center">
+                                        <div class="text-2xl mr-3">⚡</div>
+                                        <div>
+                                            <h3 class="text-lg font-semibold text-gray-900">Performance Testing</h3>
+                                            <p class="text-gray-600 text-sm">Frame rate, memory, and optimization testing</p>
+                                        </div>
+                                        <div class="ml-auto text-purple-600">→</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button class="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white py-3 rounded-lg font-semibold transition-all" onclick="showPage('contact')">
+                                Get Free Quote
+                            </button>
+                        </div>
+
+                        <!-- Software QA Testing -->
+                        <div class="service-card bg-white p-8 rounded-xl shadow-lg border border-gray-200 hover:shadow-xl">
+                            <div class="flex items-center mb-6">
+                                <div class="text-5xl mr-4">💻</div>
+                                <div>
+                                    <h2 class="text-3xl font-bold text-gray-900 mb-2">Software QA Testing</h2>
+                                    <p class="text-gray-600">Complete software validation and quality assurance</p>
+                                </div>
+                            </div>
+                            
+                            <p class="text-gray-700 mb-6 text-lg">
+                                Comprehensive testing services for web applications, mobile apps, and desktop software to ensure reliability and user satisfaction.
+                            </p>
+
+                            <div class="space-y-3 mb-6">
+                                <div class="sub-service-item p-4 rounded-lg border border-gray-200 hover:border-blue-400/40 hover:bg-blue-50" onclick="showSubService('automation')">
+                                    <div class="flex items-center">
+                                        <div class="text-2xl mr-3">🤖</div>
+                                        <div>
+                                            <h3 class="text-lg font-semibold text-gray-900">Automation Testing</h3>
+                                            <p class="text-gray-600 text-sm">Automated test suites and CI/CD integration</p>
+                                        </div>
+                                        <div class="ml-auto text-blue-600">→</div>
+                                    </div>
+                                </div>
+
+                                <div class="sub-service-item p-4 rounded-lg border border-gray-200 hover:border-blue-400/40 hover:bg-blue-50" onclick="showSubService('api')">
+                                    <div class="flex items-center">
+                                        <div class="text-2xl mr-3">🔗</div>
+                                        <div>
+                                            <h3 class="text-lg font-semibold text-gray-900">API Testing</h3>
+                                            <p class="text-gray-600 text-sm">Backend services and integration testing</p>
+                                        </div>
+                                        <div class="ml-auto text-blue-600">→</div>
+                                    </div>
+                                </div>
+
+                                <div class="sub-service-item p-4 rounded-lg border border-gray-200 hover:border-blue-400/40 hover:bg-blue-50" onclick="showSubService('usability')">
+                                    <div class="flex items-center">
+                                        <div class="text-2xl mr-3">👥</div>
+                                        <div>
+                                            <h3 class="text-lg font-semibold text-gray-900">Usability Testing</h3>
+                                            <p class="text-gray-600 text-sm">User experience and interface optimization</p>
+                                        </div>
+                                        <div class="ml-auto text-blue-600">→</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button class="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white py-3 rounded-lg font-semibold transition-all" onclick="showPage('contact')">
+                                Get Free Quote
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Why Choose Us -->
+            <section class="py-20 px-4 bg-white">
+                <div class="max-w-7xl mx-auto text-center">
+                    <h2 class="text-4xl font-bold text-gray-900 mb-4">Why Choose Perfect Proof?</h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-16">
+                        We deliver exceptional quality assurance with proven results
+                    </p>
+                    
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="text-center p-6">
+                            <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl text-white floating-element">🏆</div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Industry Expertise</h3>
+                            <p class="text-gray-600">Over 500 games and applications tested with 99% client satisfaction rate</p>
+                        </div>
+
+                        <div class="text-center p-6">
+                            <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl text-white floating-element">⚡</div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Fast Turnaround</h3>
+                            <p class="text-gray-600">Rapid testing cycles that keep your development on schedule</p>
+                        </div>
+
+                        <div class="text-center p-6">
+                            <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-teal-500 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl text-white floating-element">🔧</div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Comprehensive Reports</h3>
+                            <p class="text-gray-600">Detailed bug reports with reproduction steps and priority levels</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA Section -->
+            <section class="py-20 px-4 bg-gradient-to-r from-purple-900 via-blue-900 to-cyan-900">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h2 class="text-4xl font-bold text-white mb-6">Ready to Perfect Your Product?</h2>
+                    <p class="text-xl text-gray-300 mb-8">
+                        Let our expert QA team ensure your game or software launches flawlessly. Get started with a free consultation today.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <button class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-4 rounded-xl font-semibold transition-all transform hover:scale-105 shadow-lg glow-effect" onclick="showPage('contact')">
+                            Get Free Quote
+                        </button>
+
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- SUB-SERVICE DETAIL PAGES -->
+    
+    <!-- Functionality Testing Detail Page -->
+    <div id="functionality" class="page">
+        <div class="pt-16">
+            <!-- Hero Banner -->
+            <section class="hero-bg py-20 px-4 relative">
+                <div class="max-w-7xl mx-auto text-center relative z-10">
+                    <div class="text-6xl mb-4">⚙️</div>
+                    <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Functionality Testing</h1>
+                    <p class="text-xl text-gray-300">Ensuring every feature works perfectly</p>
+                </div>
+                
+                <!-- Floating Elements -->
+                <div class="absolute top-20 left-10 floating-element">
+                    <div class="w-16 h-16 bg-gradient-to-br from-purple-500/30 to-pink-500/30 rounded-full glow-effect"></div>
+                </div>
+                <div class="absolute top-40 right-20 floating-element" style="animation-delay: -2s;">
+                    <div class="w-12 h-12 bg-gradient-to-br from-cyan-500/30 to-blue-500/30 rounded-full glow-effect"></div>
+                </div>
+                <div class="absolute bottom-20 left-1/4 floating-element" style="animation-delay: -4s;">
+                    <div class="w-8 h-8 bg-gradient-to-br from-green-500/30 to-teal-500/30 rounded-full glow-effect"></div>
+                </div>
+            </section>
+
+            <!-- Service Description -->
+            <section class="py-20 px-4 bg-gray-50">
+                <div class="max-w-7xl mx-auto">
+                    <div class="grid lg:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <h2 class="text-3xl font-bold text-gray-900 mb-6">What is Functionality Testing?</h2>
+                            <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                                Functionality testing is the cornerstone of quality assurance, ensuring that every feature, 
+                                button, menu, and gameplay mechanic works exactly as intended. We meticulously test each 
+                                component of your game to guarantee a seamless player experience.
+                            </p>
+                            <p class="text-lg text-gray-700 leading-relaxed">
+                                Our comprehensive approach covers everything from basic UI interactions to complex gameplay 
+                                systems, ensuring your game meets player expectations and industry standards.
+                            </p>
+                        </div>
+                        <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-200">
+                            <div class="text-center">
+                                <div class="text-5xl mb-4">📊</div>
+                                <h3 class="text-2xl font-bold text-gray-900 mb-4">Testing Coverage</h3>
+                                <div class="space-y-4">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-700">Core Mechanics</span>
+                                        <span class="text-purple-600 font-bold">100%</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-700">UI Elements</span>
+                                        <span class="text-purple-600 font-bold">100%</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-700">Game Features</span>
+                                        <span class="text-purple-600 font-bold">100%</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-700">Edge Cases</span>
+                                        <span class="text-purple-600 font-bold">95%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features & Benefits -->
+            <section class="py-20 px-4 bg-white">
+                <div class="max-w-7xl mx-auto">
+                    <h2 class="text-4xl font-bold text-gray-900 text-center mb-4">Features & Benefits</h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto text-center mb-16">
+                        Comprehensive functionality testing capabilities
+                    </p>
+                    
+                    <div class="feature-grid">
+                        <div class="benefit-item bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+                            <div class="text-4xl mb-4">🎯</div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Core Gameplay Testing</h3>
+                            <p class="text-gray-600">Thorough validation of all gameplay mechanics, ensuring smooth player interactions and balanced difficulty curves.</p>
+                        </div>
+
+                        <div class="benefit-item bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+                            <div class="text-4xl mb-4">🖱️</div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">UI/UX Validation</h3>
+                            <p class="text-gray-600">Complete testing of user interfaces, menus, and navigation systems for intuitive user experiences.</p>
+                        </div>
+
+                        <div class="benefit-item bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+                            <div class="text-4xl mb-4">💾</div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Save System Testing</h3>
+                            <p class="text-gray-600">Comprehensive validation of save/load functionality, progress tracking, and data integrity.</p>
+                        </div>
+
+                        <div class="benefit-item bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+                            <div class="text-4xl mb-4">🏆</div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Achievement Systems</h3>
+                            <p class="text-gray-600">Testing of achievement triggers, progression systems, and reward mechanisms for player engagement.</p>
+                        </div>
+
+                        <div class="benefit-item bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+                            <div class="text-4xl mb-4">🔧</div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Settings & Options</h3>
+                            <p class="text-gray-600">Validation of all game settings, options menus, and configuration systems for proper functionality.</p>
+                        </div>
+
+                        <div class="benefit-item bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+                            <div class="text-4xl mb-4">🐛</div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Bug Prevention</h3>
+                            <p class="text-gray-600">Early detection of functionality issues prevents costly post-launch patches and negative reviews.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Use Cases -->
+            <section class="py-20 px-4 bg-gray-50">
+                <div class="max-w-7xl mx-auto">
+                    <h2 class="text-4xl font-bold text-gray-900 text-center mb-4">Perfect For These Scenarios</h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto text-center mb-16">
+                        When functionality testing makes the biggest impact
+                    </p>
+                    
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="bg-white rounded-xl p-8 shadow-lg border border-gray-200">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-4">🎮 Indie Game Development</h3>
+                            <p class="text-gray-700 mb-4">
+                                Perfect for indie developers who need comprehensive testing but don't have the resources 
+                                for an in-house QA team. We ensure your game meets professional standards.
+                            </p>
+                            <ul class="space-y-2 text-gray-700">
+                                <li class="flex items-center"><span class="text-purple-600 mr-2">•</span> Pre-launch validation</li>
+                                <li class="flex items-center"><span class="text-purple-600 mr-2">•</span> Steam certification prep</li>
+                                <li class="flex items-center"><span class="text-purple-600 mr-2">•</span> Platform compliance</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-white rounded-xl p-8 shadow-lg border border-gray-200">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-4">🚀 Major Updates</h3>
+                            <p class="text-gray-700 mb-4">
+                                When adding significant new features or content updates, functionality testing ensures 
+                                new additions don't break existing systems or create unexpected interactions.
+                            </p>
+                            <ul class="space-y-2 text-gray-700">
+                                <li class="flex items-center"><span class="text-blue-600 mr-2">•</span> Feature integration testing</li>
+                                <li class="flex items-center"><span class="text-blue-600 mr-2">•</span> Regression testing</li>
+                                <li class="flex items-center"><span class="text-blue-600 mr-2">•</span> Compatibility validation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA -->
+            <section class="py-20 px-4 bg-gradient-to-r from-purple-900 via-indigo-900 to-blue-900">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h2 class="text-4xl font-bold text-white mb-6">Ready to Test Your Game's Functionality?</h2>
+                    <p class="text-xl text-gray-300 mb-8">
+                        Ensure every feature works perfectly with our comprehensive functionality testing service. 
+                        Start with a free trial and see the difference professional testing makes.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <button class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-4 rounded-xl font-semibold transition-all transform hover:scale-105 shadow-lg glow-effect" onclick="showPage('contact')">
+                            Schedule Consultation
+                        </button>
+                        <button class="border-2 border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-gray-900 px-8 py-4 rounded-xl font-semibold transition-all" onclick="showPage('services')">
+                            ← Back to Services
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Compatibility Testing Detail Page -->
+    <div id="compatibility" class="page">
+        <div class="pt-16 bg-gray-900 text-white">
+            <!-- Hero Banner -->
+            <section class="py-20 px-4">
+                <div class="max-w-7xl mx-auto">
+                    <div class="hero-banner hero-compatibility flex items-center justify-center">
+                        <div class="hero-banner-content text-center">
+                            <div class="text-6xl mb-4">🔄</div>
+                            <h1 class="text-4xl md:text-5xl font-bold mb-4">Compatibility Testing</h1>
+                            <p class="text-xl text-gray-200">Seamless performance across all platforms</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Service Description -->
+            <section class="py-20 px-4 bg-gray-800">
+                <div class="max-w-7xl mx-auto">
+                    <div class="grid lg:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <h2 class="text-3xl font-bold text-blue-400 mb-6">Multi-Platform Excellence</h2>
+                            <p class="text-lg text-gray-300 mb-6 leading-relaxed">
+                                Compatibility testing ensures your game performs flawlessly across different platforms, 
+                                devices, and operating systems. We test on real hardware to guarantee authentic user experiences.
+                            </p>
+                            <p class="text-lg text-gray-300 leading-relaxed">
+                                From high-end gaming PCs to mobile devices, from PlayStation to Nintendo Switch, 
+                                we ensure your game delivers consistent quality everywhere your players want to play.
+                            </p>
+                        </div>
+                        <div class="bg-gradient-to-br from-blue-600/20 to-blue-800/20 backdrop-blur-sm rounded-2xl p-8 border border-blue-500/20 glow-effect">
+                            <div class="text-center">
+                                <div class="text-5xl mb-4">🎯</div>
+                                <h3 class="text-2xl font-bold text-white mb-4">Platform Coverage</h3>
+                                <div class="grid grid-cols-2 gap-4 text-sm">
+                                    <div class="bg-blue-600/20 rounded-lg p-3">
+                                        <div class="text-blue-400 font-semibold">PC Gaming</div>
+                                        <div class="text-gray-300">Windows, Mac, Linux</div>
+                                    </div>
+                                    <div class="bg-purple-600/20 rounded-lg p-3">
+                                        <div class="text-purple-400 font-semibold">Console</div>
+                                        <div class="text-gray-300">PS5, Xbox, Switch</div>
+                                    </div>
+                                    <div class="bg-pink-600/20 rounded-lg p-3">
+                                        <div class="text-pink-400 font-semibold">Mobile</div>
+                                        <div class="text-gray-300">iOS, Android</div>
+                                    </div>
+                                    <div class="bg-cyan-600/20 rounded-lg p-3">
+                                        <div class="text-cyan-400 font-semibold">VR/AR</div>
+                                        <div class="text-gray-300">Meta, Steam VR</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features & Benefits -->
+            <section class="py-20 px-4 bg-gray-900">
+                <div class="max-w-7xl mx-auto">
+                    <h2 class="text-4xl font-bold text-center mb-16">Testing <span class="text-blue-400">Capabilities</span></h2>
+                    
+                    <div class="feature-grid">
+                        <div class="benefit-item bg-gradient-to-br from-blue-800/30 to-blue-900/30 backdrop-blur-sm p-6 rounded-xl border border-blue-500/20 glow-effect">
+                            <div class="text-4xl mb-4">💻</div>
+                            <h3 class="text-xl font-semibold text-white mb-3">Cross-Platform Testing</h3>
+                            <p class="text-gray-300">Comprehensive testing across PC, console, and mobile platforms to ensure consistent gameplay experiences.</p>
+                        </div>
+
+                        <div class="benefit-item bg-gradient-to-br from-purple-800/30 to-purple-900/30 backdrop-blur-sm p-6 rounded-xl border border-purple-500/20 glow-effect">
+                            <div class="text-4xl mb-4">📱</div>
+                            <h3 class="text-xl font-semibold text-white mb-3">Device Compatibility</h3>
+                            <p class="text-gray-300">Testing on various device specifications, screen sizes, and hardware configurations for optimal performance.</p>
+                        </div>
+
+                        <div class="benefit-item bg-gradient-to-br from-cyan-800/30 to-cyan-900/30 backdrop-blur-sm p-6 rounded-xl border border-cyan-500/20 glow-effect">
+                            <div class="text-4xl mb-4">🔧</div>
+                            <h3 class="text-xl font-semibold text-white mb-3">OS Version Testing</h3>
+                            <p class="text-gray-300">Validation across different operating system versions to ensure broad compatibility and user reach.</p>
+                        </div>
+
+                        <div class="benefit-item bg-gradient-to-br from-green-800/30 to-green-900/30 backdrop-blur-sm p-6 rounded-xl border border-green-500/20 glow-effect">
+                            <div class="text-4xl mb-4">🎮</div>
+                            <h3 class="text-xl font-semibold text-white mb-3">Controller Support</h3>
+                            <p class="text-gray-300">Testing various input methods including keyboards, controllers, touch screens, and specialized gaming peripherals.</p>
+                        </div>
+
+                        <div class="benefit-item bg-gradient-to-br from-pink-800/30 to-pink-900/30 backdrop-blur-sm p-6 rounded-xl border border-pink-500/20 glow-effect">
+                            <div class="text-4xl mb-4">🌐</div>
+                            <h3 class="text-xl font-semibold text-white mb-3">Network Compatibility</h3>
+                            <p class="text-gray-300">Testing online features across different network conditions and connection types for reliable multiplayer experiences.</p>
+                        </div>
+
+                        <div class="benefit-item bg-gradient-to-br from-orange-800/30 to-orange-900/30 backdrop-blur-sm p-6 rounded-xl border border-orange-500/20 glow-effect">
+                            <div class="text-4xl mb-4">📊</div>
+                            <h3 class="text-xl font-semibold text-white mb-3">Performance Scaling</h3>
+                            <p class="text-gray-300">Ensuring your game scales appropriately across different hardware specifications and performance levels.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA -->
+            <section class="py-20 px-4 bg-gradient-to-r from-blue-900 via-purple-900 to-cyan-900">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h2 class="text-4xl font-bold text-white mb-6">Ensure Universal Compatibility</h2>
+                    <p class="text-xl text-gray-300 mb-8">
+                        Reach every player on every platform with our comprehensive compatibility testing. 
+                        Don't let platform limitations hold back your game's success.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <button class="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-8 py-4 rounded-xl font-semibold transition-all transform hover:scale-105 shadow-lg glow-effect" onclick="showPage('contact')">
+                            Schedule Consultation
+                        </button>
+                        <button class="border-2 border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-gray-900 px-8 py-4 rounded-xl font-semibold transition-all" onclick="showPage('services')">
+                            ← Back to Services
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Performance Testing Detail Page -->
+    <div id="performance" class="page">
+        <div class="pt-16 bg-gray-900 text-white">
+            <!-- Hero Banner -->
+            <section class="py-20 px-4">
+                <div class="max-w-7xl mx-auto">
+                    <div class="hero-banner hero-performance flex items-center justify-center">
+                        <div class="hero-banner-content text-center">
+                            <div class="text-6xl mb-4">⚡</div>
+                            <h1 class="text-4xl md:text-5xl font-bold mb-4">Performance Testing</h1>
+                            <p class="text-xl text-gray-200">Optimized speed and smooth gameplay</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Service Description -->
+            <section class="py-20 px-4 bg-gray-800">
+                <div class="max-w-7xl mx-auto">
+                    <div class="grid lg:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <h2 class="text-3xl font-bold text-cyan-400 mb-6">Maximize Performance</h2>
+                            <p class="text-lg text-gray-300 mb-6 leading-relaxed">
+                                Performance testing ensures your game runs smoothly across all target devices and platforms. 
+                                We identify bottlenecks, optimize frame rates, and ensure consistent performance under various conditions.
+                            </p>
+                            <p class="text-lg text-gray-300 leading-relaxed">
+                                From memory optimization to load time reduction, we help you deliver the smooth, 
+                                responsive gameplay experience that keeps players engaged and satisfied.
+                            </p>
+                        </div>
+                        <div class="bg-gradient-to-br from-cyan-600/20 to-cyan-800/20 backdrop-blur-sm rounded-2xl p-8 border border-cyan-500/20 glow-effect">
+                            <div class="text-center">
+                                <div class="text-5xl mb-4">📈</div>
+                                <h3 class="text-2xl font-bold text-white mb-4">Performance Metrics</h3>
+                                <div class="space-y-4">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-300">Frame Rate</span>
+                                        <span class="text-cyan-400 font-bold">60+ FPS</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-300">Load Times</span>
+                                        <span class="text-cyan-400 font-bold">&lt; 3 sec</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-300">Memory Usage</span>
+                                        <span class="text-cyan-400 font-bold">Optimized</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-300">Battery Impact</span>
+                                        <span class="text-cyan-400 font-bold">Minimal</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features & Benefits -->
+            <section class="py-20 px-4 bg-gray-900">
+                <div class="max-w-7xl mx-auto">
+                    <h2 class="text-4xl font-bold text-center mb-16">Performance <span class="text-cyan-400">Optimization</span></h2>
+                    
+                    <div class="feature-grid">
+                        <div class="benefit-item bg-gradient-to-br from-cyan-800/30 to-cyan-900/30 backdrop-blur-sm p-6 rounded-xl border border-cyan-500/20 glow-effect">
+                            <div class="text-4xl mb-4">🎯</div>
+                            <h3 class="text-xl font-semibold text-white mb-3">Frame Rate Analysis</h3>
+                            <p class="text-gray-300">Detailed frame rate monitoring and optimization to ensure smooth 60+ FPS gameplay across all target platforms.</p>
+                        </div>
+
+                        <div class="benefit-item bg-gradient-to-br from-blue-800/30 to-blue-900/30 backdrop-blur-sm p-6 rounded-xl border border-blue-500/20 glow-effect">
+                            <div class="text-4xl mb-4">💾</div>
+                            <h3 class="text-xl font-semibold text-white mb-3">Memory Optimization</h3>
+                            <p class="text-gray-300">Memory usage analysis and optimization to prevent crashes and ensure stable performance on lower-end devices.</p>
+                        </div>
+
+                        <div class="benefit-item bg-gradient-to-br from-purple-800/30 to-purple-900/30 backdrop-blur-sm p-6 rounded-xl border border-purple-500/20 glow-effect">
+                            <div class="text-4xl mb-4">⏱️</div>
+                            <h3 class="text-xl font-semibold text-white mb-3">Load Time Testing</h3>
+                            <p class="text-gray-300">Comprehensive testing of loading times, startup performance, and level transitions for optimal user experience.</p>
+                        </div>
+
+                        <div class="benefit-item bg-gradient-to-br from-green-800/30 to-green-900/30 backdrop-blur-sm p-6 rounded-xl border border-green-500/20 glow-effect">
+                            <div class="text-4xl mb-4">🔋</div>
+                            <h3 class="text-xl font-semibold text-white mb-3">Battery Life Impact</h3>
+                            <p class="text-gray-300">Mobile-specific testing to minimize battery drain while maintaining high-quality gameplay experiences.</p>
+                        </div>
+
+                        <div class="benefit-item bg-gradient-to-br from-pink-800/30 to-pink-900/30 backdrop-blur-sm p-6 rounded-xl border border-pink-500/20 glow-effect">
+                            <div class="text-4xl mb-4">🌡️</div>
+                            <h3 class="text-xl font-semibold text-white mb-3">Thermal Testing</h3>
+                            <p class="text-gray-300">Device temperature monitoring to prevent overheating and ensure sustained performance during extended play sessions.</p>
+                        </div>
+
+                        <div class="benefit-item bg-gradient-to-br from-orange-800/30 to-orange-900/30 backdrop-blur-sm p-6 rounded-xl border border-orange-500/20 glow-effect">
+                            <div class="text-4xl mb-4">📊</div>
+                            <h3 class="text-xl font-semibold text-white mb-3">Stress Testing</h3>
+                            <p class="text-gray-300">High-load scenario testing to ensure your game maintains performance under demanding conditions and peak usage.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA -->
+            <section class="py-20 px-4 bg-gradient-to-r from-cyan-900 via-blue-900 to-purple-900">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h2 class="text-4xl font-bold text-white mb-6">Optimize Your Game's Performance</h2>
+                    <p class="text-xl text-gray-300 mb-8">
+                        Deliver smooth, responsive gameplay that keeps players engaged. 
+                        Our performance testing ensures your game runs perfectly on every device.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <button class="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white px-8 py-4 rounded-xl font-semibold transition-all transform hover:scale-105 shadow-lg glow-effect" onclick="showPage('contact')">
+                            Schedule Consultation
+                        </button>
+                        <button class="border-2 border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-gray-900 px-8 py-4 rounded-xl font-semibold transition-all" onclick="showPage('services')">
+                            ← Back to Services
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Automation Testing Detail Page -->
+    <div id="automation" class="page">
+        <div class="pt-16 bg-gray-900 text-white">
+            <!-- Hero Banner -->
+            <section class="py-20 px-4">
+                <div class="max-w-7xl mx-auto">
+                    <div class="hero-banner hero-automation flex items-center justify-center">
+                        <div class="hero-banner-content text-center">
+                            <div class="text-6xl mb-4">🤖</div>
+                            <h1 class="text-4xl md:text-5xl font-bold mb-4">Automation Testing</h1>
+                            <p class="text-xl text-gray-200">Efficient, scalable, and reliable testing</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Service Description -->
+            <section class="py-20 px-4 bg-gray-800">
+                <div class="max-w-7xl mx-auto">
+                    <div class="grid lg:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <h2 class="text-3xl font-bold text-pink-400 mb-6">Automated Testing Excellence</h2>
+                            <p class="text-lg text-gray-300 mb-6 leading-relaxed">
+                                Automation testing accelerates your development cycle by running comprehensive test suites 
+                                automatically. Our custom automation frameworks integrate seamlessly with your CI/CD pipeline.
+                            </p>
+                            <p class="text-lg text-gray-300 leading-relaxed">
+                                From regression testing to continuous integration, we build robust automated testing solutions 
+                                that catch bugs early and ensure consistent quality throughout your development process.
+                            </p>
+                        </div>
+                        <div class="bg-gradient-to-br from-pink-600/20 to-pink-800/20 backdrop-blur-sm rounded-2xl p-8 border border-pink-500/20 glow-effect">
+                            <div class="text-center">
+                                <div class="text-5xl mb-4">⚡</div>
+                                <h3 class="text-2xl font-bold text-white mb-4">Automation Benefits</h3>
+                                <div class="space-y-4">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-300">Speed Increase</span>
+                                        <span class="text-pink-400 font-bold">10x Faster</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-300">Test Coverage</span>
+                                        <span class="text-pink-400 font-bold">95%+</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-300">Regression Testing</span>
+                                        <span class="text-pink-400 font-bold">24/7</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-300">Cost Reduction</span>
+                                        <span class="text-pink-400 font-bold">60%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features & Benefits -->
+            <section class="py-20 px-4 bg-gray-900">
+                <div class="max-w-7xl mx-auto">
+                    <h2 class="text-4xl font-bold text-center mb-16">Automation <span class="text-pink-400">Capabilities</span></h2>
+                    
+                    <div class="feature-grid">
+                        <div class="benefit-item bg-gradient-to-br from-pink-800/30 to-pink-900/30 backdrop-blur-sm p-6 rounded-xl border border-pink-500/20 glow-effect">
+                            <div class="text-4xl mb-4">🔄</div>
+                            <h3 class="text-xl font-semibold text-white mb-3">CI/CD Integration</h3>
+                            <p class="text-gray-300">Seamless integration with your development pipeline for continuous testing and quality assurance.</p>
+                        </div>
+
+                        <div class="benefit-item bg-gradient-to-br from-purple-800/30 to-purple-900/30 backdrop-blur-sm p-6 rounded-xl border border-purple-500/20 glow-effect">
+                            <div class="text-4xl mb-4">🧪</div>
+                            <h3 class="text-xl font-semibold text-white mb-3">Regression Testing</h3>
+                            <p class="text-gray-300">Automated regression test suites that run with every build to catch breaking changes immediately.</p>
+                        </div>
+
+                        <div class="benefit-item bg-gradient-to-br from-blue-800/30 to-blue-900/30 backdrop-blur-sm p-6 rounded-xl border border-blue-500/20 glow-effect">
+                            <div class="text-4xl mb-4">📱</div>
+                            <h3 class="text-xl font-semibold text-white mb-3">Cross-Platform Automation</h3>
+                            <p class="text-gray-300">Automated testing across multiple platforms and devices for comprehensive coverage.</p>
+                        </div>
+
+                        <div class="benefit-item bg-gradient-to-br from-cyan-800/30 to-cyan-900/30 backdrop-blur-sm p-6 rounded-xl border border-cyan-500/20 glow-effect">
+                            <div class="text-4xl mb-4">📊</div>
+                            <h3 class="text-xl font-semibold text-white mb-3">Detailed Reporting</h3>
+                            <p class="text-gray-300">Comprehensive test reports with screenshots, logs, and detailed failure analysis for quick debugging.</p>
+                        </div>
+
+                        <div class="benefit-item bg-gradient-to-br from-green-800/30 to-green-900/30 backdrop-blur-sm p-6 rounded-xl border border-green-500/20 glow-effect">
+                            <div class="text-4xl mb-4">⏰</div>
+                            <h3 class="text-xl font-semibold text-white mb-3">24/7 Testing</h3>
+                            <p class="text-gray-300">Round-the-clock automated testing ensures issues are caught and reported immediately.</p>
+                        </div>
+
+                        <div class="benefit-item bg-gradient-to-br from-orange-800/30 to-orange-900/30 backdrop-blur-sm p-6 rounded-xl border border-orange-500/20 glow-effect">
+                            <div class="text-4xl mb-4">🎯</div>
+                            <h3 class="text-xl font-semibold text-white mb-3">Custom Frameworks</h3>
+                            <p class="text-gray-300">Tailored automation frameworks designed specifically for your application's unique requirements.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA -->
+            <section class="py-20 px-4 bg-gradient-to-r from-pink-900 via-purple-900 to-blue-900">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h2 class="text-4xl font-bold text-white mb-6">Accelerate Your Development</h2>
+                    <p class="text-xl text-gray-300 mb-8">
+                        Speed up your testing process with intelligent automation. 
+                        Catch bugs faster, deploy with confidence, and focus on building great features.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <button class="bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-white px-8 py-4 rounded-xl font-semibold transition-all transform hover:scale-105 shadow-lg glow-effect" onclick="showPage('contact')">
+                            Schedule Consultation
+                        </button>
+                        <button class="border-2 border-pink-400 text-pink-400 hover:bg-pink-400 hover:text-gray-900 px-8 py-4 rounded-xl font-semibold transition-all" onclick="showPage('services')">
+                            ← Back to Services
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- API Testing Detail Page -->
+    <div id="api" class="page">
+        <div class="pt-16 bg-gray-900 text-white">
+            <!-- Hero Banner -->
+            <section class="py-20 px-4">
+                <div class="max-w-7xl mx-auto">
+                    <div class="hero-banner hero-api flex items-center justify-center">
+                        <div class="hero-banner-content text-center">
+                            <div class="text-6xl mb-4">🔗</div>
+                            <h1 class="text-4xl md:text-5xl font-bold mb-4">API Testing</h1>
+                            <p class="text-xl text-gray-200">Robust backend and integration testing</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Service Description -->
+            <section class="py-20 px-4 bg-gray-800">
+                <div class="max-w-7xl mx-auto">
+                    <div class="grid lg:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <h2 class="text-3xl font-bold text-green-400 mb-6">Comprehensive API Validation</h2>
+                            <p class="text-lg text-gray-300 mb-6 leading-relaxed">
+                                API testing ensures your backend services, integrations, and data exchanges work flawlessly. 
+                                We validate functionality, performance, and security of all your API endpoints.
+                            </p>
+                            <p class="text-lg text-gray-300 leading-relaxed">
+                                From REST APIs to GraphQL, from authentication to data validation, 
+                                we ensure your backend infrastructure supports your application reliably.
+                            </p>
+                        </div>
+                        <div class="bg-gradient-to-br from-green-600/20 to-green-800/20 backdrop-blur-sm rounded-2xl p-8 border border-green-500/20 glow-effect">
+                            <div class="text-center">
+                                <div class="text-5xl mb-4">🎯</div>
+                                <h3 class="text-2xl font-bold text-white mb-4">API Coverage</h3>
+                                <div class="space-y-4">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-300">Endpoint Testing</span>
+                                        <span class="text-green-400 font-bold">100%</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-300">Data Validation</span>
+                                        <span class="text-green-400 font-bold">Complete</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-300">Security Testing</span>
+                                        <span class="text-green-400 font-bold">Advanced</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-300">Performance</span>
+                                        <span class="text-green-400 font-bold">Optimized</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features & Benefits -->
+            <section class="py-20 px-4 bg-gray-900">
+                <div class="max-w-7xl mx-auto">
+                    <h2 class="text-4xl font-bold text-center mb-16">API Testing <span class="text-green-400">Services</span></h2>
+                    
+                    <div class="feature-grid">
+                        <div class="benefit-item bg-gradient-to-br from-green-800/30 to-green-900/30 backdrop-blur-sm p-6 rounded-xl border border-green-500/20 glow-effect">
+                            <div class="text-4xl mb-4">🔍</div>
+                            <h3 class="text-xl font-semibold text-white mb-3">Endpoint Validation</h3>
+                            <p class="text-gray-300">Comprehensive testing of all API endpoints for correct functionality, response formats, and error handling.</p>
+                        </div>
+
+                        <div class="benefit-item bg-gradient-to-br from-blue-800/30 to-blue-900/30 backdrop-blur-sm p-6 rounded-xl border border-blue-500/20 glow-effect">
+                            <div class="text-4xl mb-4">📊</div>
+                            <h3 class="text-xl font-semibold text-white mb-3">Data Integrity Testing</h3>
+                            <p class="text-gray-300">Validation of data accuracy, consistency, and proper handling of various data types and edge cases.</p>
+                        </div>
+
+                        <div class="benefit-item bg-gradient-to-br from-purple-800/30 to-purple-900/30 backdrop-blur-sm p-6 rounded-xl border border-purple-500/20 glow-effect">
+                            <div class="text-4xl mb-4">🔐</div>
+                            <h3 class="text-xl font-semibold text-white mb-3">Security Testing</h3>
+                            <p class="text-gray-300">Authentication, authorization, and security vulnerability testing to protect your API from threats.</p>
+                        </div>
+
+                        <div class="benefit-item bg-gradient-to-br from-cyan-800/30 to-cyan-900/30 backdrop-blur-sm p-6 rounded-xl border border-cyan-500/20 glow-effect">
+                            <div class="text-4xl mb-4">⚡</div>
+                            <h3 class="text-xl font-semibold text-white mb-3">Performance Testing</h3>
+                            <p class="text-gray-300">Load testing, stress testing, and performance optimization for high-traffic API scenarios.</p>
+                        </div>
+
+                        <div class="benefit-item bg-gradient-to-br from-pink-800/30 to-pink-900/30 backdrop-blur-sm p-6 rounded-xl border border-pink-500/20 glow-effect">
+                            <div class="text-4xl mb-4">🔄</div>
+                            <h3 class="text-xl font-semibold text-white mb-3">Integration Testing</h3>
+                            <p class="text-gray-300">End-to-end testing of API integrations with third-party services and internal systems.</p>
+                        </div>
+
+                        <div class="benefit-item bg-gradient-to-br from-orange-800/30 to-orange-900/30 backdrop-blur-sm p-6 rounded-xl border border-orange-500/20 glow-effect">
+                            <div class="text-4xl mb-4">📋</div>
+                            <h3 class="text-xl font-semibold text-white mb-3">Documentation Testing</h3>
+                            <p class="text-gray-300">Validation that API documentation matches actual implementation and provides accurate examples.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA -->
+            <section class="py-20 px-4 bg-gradient-to-r from-green-900 via-blue-900 to-cyan-900">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h2 class="text-4xl font-bold text-white mb-6">Secure Your Backend</h2>
+                    <p class="text-xl text-gray-300 mb-8">
+                        Ensure your APIs are robust, secure, and performant. 
+                        Our comprehensive API testing gives you confidence in your backend infrastructure.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <button class="bg-gradient-to-r from-green-600 to-cyan-600 hover:from-green-700 hover:to-cyan-700 text-white px-8 py-4 rounded-xl font-semibold transition-all transform hover:scale-105 shadow-lg glow-effect" onclick="showPage('contact')">
+                            Schedule Consultation
+                        </button>
+                        <button class="border-2 border-green-400 text-green-400 hover:bg-green-400 hover:text-gray-900 px-8 py-4 rounded-xl font-semibold transition-all" onclick="showPage('services')">
+                            ← Back to Services
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Usability Testing Detail Page -->
+    <div id="usability" class="page">
+        <div class="pt-16 bg-gray-900 text-white">
+            <!-- Hero Banner -->
+            <section class="py-20 px-4">
+                <div class="max-w-7xl mx-auto">
+                    <div class="hero-banner hero-usability flex items-center justify-center">
+                        <div class="hero-banner-content text-center">
+                            <div class="text-6xl mb-4">👥</div>
+                            <h1 class="text-4xl md:text-5xl font-bold mb-4">Usability Testing</h1>
+                            <p class="text-xl text-gray-200">Optimized user experience and interface</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Service Description -->
+            <section class="py-20 px-4 bg-gray-800">
+                <div class="max-w-7xl mx-auto">
+                    <div class="grid lg:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <h2 class="text-3xl font-bold text-purple-400 mb-6">User-Centered Testing</h2>
+                            <p class="text-lg text-gray-300 mb-6 leading-relaxed">
+                                Usability testing focuses on the user experience, ensuring your application is intuitive, 
+                                accessible, and enjoyable to use. We test with real users to identify pain points and optimization opportunities.
+                            </p>
+                            <p class="text-lg text-gray-300 leading-relaxed">
+                                From navigation flow to accessibility compliance, we ensure your application delivers 
+                                exceptional user experiences that drive engagement and satisfaction.
+                            </p>
+                        </div>
+                        <div class="bg-gradient-to-br from-purple-600/20 to-purple-800/20 backdrop-blur-sm rounded-2xl p-8 border border-purple-500/20 glow-effect">
+                            <div class="text-center">
+                                <div class="text-5xl mb-4">📈</div>
+                                <h3 class="text-2xl font-bold text-white mb-4">UX Improvements</h3>
+                                <div class="space-y-4">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-300">User Satisfaction</span>
+                                        <span class="text-purple-400 font-bold">+40%</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-300">Task Completion</span>
+                                        <span class="text-purple-400 font-bold">+35%</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-300">Error Reduction</span>
+                                        <span class="text-purple-400 font-bold">-60%</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-300">Accessibility</span>
+                                        <span class="text-purple-400 font-bold">WCAG 2.1</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features & Benefits -->
+            <section class="py-20 px-4 bg-gray-900">
+                <div class="max-w-7xl mx-auto">
+                    <h2 class="text-4xl font-bold text-center mb-16">Usability <span class="text-purple-400">Testing Areas</span></h2>
+                    
+                    <div class="feature-grid">
+                        <div class="benefit-item bg-gradient-to-br from-purple-800/30 to-purple-900/30 backdrop-blur-sm p-6 rounded-xl border border-purple-500/20 glow-effect">
+                            <div class="text-4xl mb-4">🧭</div>
+                            <h3 class="text-xl font-semibold text-white mb-3">Navigation Testing</h3>
+                            <p class="text-gray-300">Evaluation of menu structures, navigation flows, and user journey optimization for intuitive experiences.</p>
+                        </div>
+
+                        <div class="benefit-item bg-gradient-to-br from-blue-800/30 to-blue-900/30 backdrop-blur-sm p-6 rounded-xl border border-blue-500/20 glow-effect">
+                            <div class="text-4xl mb-4">♿</div>
+                            <h3 class="text-xl font-semibold text-white mb-3">Accessibility Testing</h3>
+                            <p class="text-gray-300">WCAG compliance testing to ensure your application is accessible to users with disabilities.</p>
+                        </div>
+
+                        <div class="benefit-item bg-gradient-to-br from-cyan-800/30 to-cyan-900/30 backdrop-blur-sm p-6 rounded-xl border border-cyan-500/20 glow-effect">
+                            <div class="text-4xl mb-4">📱</div>
+                            <h3 class="text-xl font-semibold text-white mb-3">Responsive Design</h3>
+                            <p class="text-gray-300">Testing across different screen sizes and devices to ensure consistent user experiences.</p>
+                        </div>
+
+                        <div class="benefit-item bg-gradient-to-br from-green-800/30 to-green-900/30 backdrop-blur-sm p-6 rounded-xl border border-green-500/20 glow-effect">
+                            <div class="text-4xl mb-4">👁️</div>
+                            <h3 class="text-xl font-semibold text-white mb-3">Visual Design Testing</h3>
+                            <p class="text-gray-300">Evaluation of visual hierarchy, color schemes, typography, and overall aesthetic appeal.</p>
+                        </div>
+
+                        <div class="benefit-item bg-gradient-to-br from-pink-800/30 to-pink-900/30 backdrop-blur-sm p-6 rounded-xl border border-pink-500/20 glow-effect">
+                            <div class="text-4xl mb-4">⏱️</div>
+                            <h3 class="text-xl font-semibold text-white mb-3">Task Efficiency</h3>
+                            <p class="text-gray-300">Analysis of user task completion times and identification of workflow optimization opportunities.</p>
+                        </div>
+
+                        <div class="benefit-item bg-gradient-to-br from-orange-800/30 to-orange-900/30 backdrop-blur-sm p-6 rounded-xl border border-orange-500/20 glow-effect">
+                            <div class="text-4xl mb-4">💬</div>
+                            <h3 class="text-xl font-semibold text-white mb-3">User Feedback</h3>
+                            <p class="text-gray-300">Real user testing sessions with detailed feedback collection and actionable improvement recommendations.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA -->
+            <section class="py-20 px-4 bg-gradient-to-r from-purple-900 via-pink-900 to-blue-900">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h2 class="text-4xl font-bold text-white mb-6">Perfect Your User Experience</h2>
+                    <p class="text-xl text-gray-300 mb-8">
+                        Create applications that users love to use. 
+                        Our usability testing ensures your interface is intuitive, accessible, and engaging.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <button class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-4 rounded-xl font-semibold transition-all transform hover:scale-105 shadow-lg glow-effect" onclick="showPage('contact')">
+                            Schedule Consultation
+                        </button>
+                        <button class="border-2 border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-gray-900 px-8 py-4 rounded-xl font-semibold transition-all" onclick="showPage('services')">
+                            ← Back to Services
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- CAREERS PAGE -->
+    <div id="careers" class="page">
+        <div class="pt-16">
+            <!-- Hero Section -->
+            <section class="hero-bg py-20 px-4 relative">
+                <div class="max-w-7xl mx-auto text-center relative z-10">
+                    <h1 class="text-5xl md:text-6xl font-bold text-white mb-6">
+                        Join <span class="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent text-glow">Perfect Proof</span>
+                    </h1>
+                    <p class="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto">
+                        Build your career with a passionate team of QA professionals. We're always looking for talented individuals 
+                        who share our commitment to quality and excellence.
+                    </p>
+                </div>
+                
+                <!-- Floating Elements -->
+                <div class="absolute top-20 left-10 floating-element">
+                    <div class="w-16 h-16 bg-gradient-to-br from-purple-500/30 to-pink-500/30 rounded-full glow-effect"></div>
+                </div>
+                <div class="absolute top-40 right-20 floating-element" style="animation-delay: -2s;">
+                    <div class="w-12 h-12 bg-gradient-to-br from-cyan-500/30 to-blue-500/30 rounded-full glow-effect"></div>
+                </div>
+                <div class="absolute bottom-20 left-1/4 floating-element" style="animation-delay: -4s;">
+                    <div class="w-8 h-8 bg-gradient-to-br from-green-500/30 to-teal-500/30 rounded-full glow-effect"></div>
+                </div>
+            </section>
+
+            <!-- Why Work With Us -->
+            <section class="py-20 px-4 bg-gray-50">
+                <div class="max-w-7xl mx-auto">
+                    <h2 class="text-4xl font-bold text-gray-900 text-center mb-4">Why Work With Us?</h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto text-center mb-16">
+                        Join a team that values growth, innovation, and work-life balance
+                    </p>
+                    
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200 text-center">
+                            <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl text-white">🚀</div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Growth Opportunities</h3>
+                            <p class="text-gray-600 text-sm">Continuous learning and career advancement in cutting-edge QA technologies</p>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200 text-center">
+                            <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl text-white">🏠</div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Remote Friendly</h3>
+                            <p class="text-gray-600 text-sm">Flexible work arrangements with full remote and hybrid options</p>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200 text-center">
+                            <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-teal-500 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl text-white">💰</div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Competitive Benefits</h3>
+                            <p class="text-gray-600 text-sm">Excellent compensation, health benefits, and performance bonuses</p>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200 text-center">
+                            <div class="w-16 h-16 bg-gradient-to-br from-pink-500 to-purple-500 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl text-white">🎮</div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Exciting Projects</h3>
+                            <p class="text-gray-600 text-sm">Work on cutting-edge games and applications from indie to AAA</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Open Positions -->
+            <section class="py-20 px-4 bg-white">
+                <div class="max-w-7xl mx-auto">
+                    <h2 class="text-4xl font-bold text-gray-900 text-center mb-4">Open Positions</h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto text-center mb-16">
+                        Current opportunities to join our growing team
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <!-- Senior QA Engineer -->
+                        <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 hover:shadow-xl transition-all">
+                            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                                <div class="flex-1">
+                                    <div class="flex items-center mb-4">
+                                        <div class="text-3xl mr-4">🎯</div>
+                                        <div>
+                                            <h3 class="text-2xl font-bold text-gray-900">Senior QA Engineer</h3>
+                                            <p class="text-gray-600">Full-time • Remote/Hybrid • $80k-$120k</p>
+                                        </div>
+                                    </div>
+                                    <p class="text-gray-700 mb-4">
+                                        Lead complex testing projects and mentor junior team members. 5+ years experience in game or software QA required.
+                                    </p>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">Game Testing</span>
+                                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Automation</span>
+                                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">Leadership</span>
+                                    </div>
+                                </div>
+                                <div class="mt-6 lg:mt-0 lg:ml-8">
+                                    <button class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-6 py-3 rounded-lg font-semibold transition-all" onclick="showPage('contact')">
+                                        Apply Now
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Mobile QA Specialist -->
+                        <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 hover:shadow-xl transition-all">
+                            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                                <div class="flex-1">
+                                    <div class="flex items-center mb-4">
+                                        <div class="text-3xl mr-4">📱</div>
+                                        <div>
+                                            <h3 class="text-2xl font-bold text-gray-900">Mobile QA Specialist</h3>
+                                            <p class="text-gray-600">Full-time • Remote • $60k-$90k</p>
+                                        </div>
+                                    </div>
+                                    <p class="text-gray-700 mb-4">
+                                        Focus on mobile game and app testing across iOS and Android platforms. Experience with device compatibility testing preferred.
+                                    </p>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Mobile Testing</span>
+                                        <span class="bg-cyan-100 text-cyan-800 px-3 py-1 rounded-full text-sm">iOS/Android</span>
+                                        <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">Device Testing</span>
+                                    </div>
+                                </div>
+                                <div class="mt-6 lg:mt-0 lg:ml-8">
+                                    <button class="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-6 py-3 rounded-lg font-semibold transition-all" onclick="showPage('contact')">
+                                        Apply Now
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Automation QA Engineer -->
+                        <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 hover:shadow-xl transition-all">
+                            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                                <div class="flex-1">
+                                    <div class="flex items-center mb-4">
+                                        <div class="text-3xl mr-4">🤖</div>
+                                        <div>
+                                            <h3 class="text-2xl font-bold text-gray-900">Automation QA Engineer</h3>
+                                            <p class="text-gray-600">Full-time • Remote/Hybrid • $70k-$100k</p>
+                                        </div>
+                                    </div>
+                                    <p class="text-gray-700 mb-4">
+                                        Build and maintain automated testing frameworks. Strong programming skills and CI/CD experience required.
+                                    </p>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="bg-pink-100 text-pink-800 px-3 py-1 rounded-full text-sm">Automation</span>
+                                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">Python/Java</span>
+                                        <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm">CI/CD</span>
+                                    </div>
+                                </div>
+                                <div class="mt-6 lg:mt-0 lg:ml-8">
+                                    <button class="bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-white px-6 py-3 rounded-lg font-semibold transition-all" onclick="showPage('contact')">
+                                        Apply Now
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Junior QA Tester -->
+                        <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 hover:shadow-xl transition-all">
+                            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                                <div class="flex-1">
+                                    <div class="flex items-center mb-4">
+                                        <div class="text-3xl mr-4">🌟</div>
+                                        <div>
+                                            <h3 class="text-2xl font-bold text-gray-900">Junior QA Tester</h3>
+                                            <p class="text-gray-600">Full-time • Remote/On-site • $45k-$65k</p>
+                                        </div>
+                                    </div>
+                                    <p class="text-gray-700 mb-4">
+                                        Perfect entry-level position for QA enthusiasts. We provide comprehensive training and mentorship opportunities.
+                                    </p>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">Entry Level</span>
+                                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Training Provided</span>
+                                        <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">Mentorship</span>
+                                    </div>
+                                </div>
+                                <div class="mt-6 lg:mt-0 lg:ml-8">
+                                    <button class="bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 text-white px-6 py-3 rounded-lg font-semibold transition-all" onclick="showPage('contact')">
+                                        Apply Now
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Application Process -->
+            <section class="py-20 px-4 bg-gray-50">
+                <div class="max-w-7xl mx-auto">
+                    <h2 class="text-4xl font-bold text-gray-900 text-center mb-4">Application Process</h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto text-center mb-16">
+                        Simple steps to join our team
+                    </p>
+                    
+                    <div class="grid md:grid-cols-4 gap-8">
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl text-white font-bold">1</div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Apply Online</h3>
+                            <p class="text-gray-600 text-sm">Submit your application through our contact form with your resume and cover letter</p>
+                        </div>
+
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl text-white font-bold">2</div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Initial Review</h3>
+                            <p class="text-gray-600 text-sm">Our HR team reviews your application and reaches out within 3-5 business days</p>
+                        </div>
+
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-teal-500 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl text-white font-bold">3</div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Interview Process</h3>
+                            <p class="text-gray-600 text-sm">Technical interview and team fit assessment with our QA leads</p>
+                        </div>
+
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-gradient-to-br from-pink-500 to-purple-500 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl text-white font-bold">4</div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Welcome Aboard</h3>
+                            <p class="text-gray-600 text-sm">Onboarding, training, and integration with your new team</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA Section -->
+            <section class="py-20 px-4 bg-gradient-to-r from-purple-900 via-blue-900 to-cyan-900">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h2 class="text-4xl font-bold text-white mb-6">Ready to Join Our Team?</h2>
+                    <p class="text-xl text-gray-300 mb-8">
+                        Take the next step in your QA career with Perfect Proof. We're excited to hear from passionate 
+                        professionals who want to make a difference in the world of quality assurance.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <button class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-4 rounded-xl font-semibold transition-all transform hover:scale-105 shadow-lg glow-effect" onclick="showPage('contact')">
+                            Apply Now
+                        </button>
+                        <button class="border-2 border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-gray-900 px-8 py-4 rounded-xl font-semibold transition-all" onclick="showPage('about')">
+                            Learn About Us
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- ABOUT US PAGE -->
+    <div id="about" class="page">
+        <div class="pt-16">
+            <!-- Hero Section -->
+            <section class="hero-bg py-20 px-4 relative">
+                <div class="max-w-7xl mx-auto text-center relative z-10">
+                    <h1 class="text-5xl md:text-6xl font-bold text-white mb-6">
+                        About <span class="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent text-glow">Perfect Proof</span>
+                    </h1>
+                    <p class="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto">
+                        We are passionate QA professionals dedicated to ensuring your games and software deliver flawless experiences. 
+                        With years of expertise and cutting-edge testing methodologies, we help you launch with confidence.
+                    </p>
+                </div>
+                
+                <!-- Floating Elements -->
+                <div class="absolute top-20 left-10 floating-element">
+                    <div class="w-16 h-16 bg-gradient-to-br from-purple-500/30 to-pink-500/30 rounded-full glow-effect"></div>
+                </div>
+                <div class="absolute top-40 right-20 floating-element" style="animation-delay: -2s;">
+                    <div class="w-12 h-12 bg-gradient-to-br from-cyan-500/30 to-blue-500/30 rounded-full glow-effect"></div>
+                </div>
+                <div class="absolute bottom-20 left-1/4 floating-element" style="animation-delay: -4s;">
+                    <div class="w-8 h-8 bg-gradient-to-br from-green-500/30 to-teal-500/30 rounded-full glow-effect"></div>
+                </div>
+            </section>
+
+            <!-- Our Story -->
+            <section class="py-20 px-4 bg-gray-50">
+                <div class="max-w-7xl mx-auto">
+                    <div class="grid lg:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <h2 class="text-4xl font-bold text-gray-900 mb-6">Our Story</h2>
+                            <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                                Founded in 2018 by a team of veteran game developers and QA specialists, Perfect Proof was born 
+                                from a simple belief: every user deserves a perfect experience. After witnessing countless 
+                                promising projects fail due to preventable bugs and usability issues, we set out to change that.
+                            </p>
+                            <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                                Today, we've tested over 500 games and applications, helping indie developers and major studios 
+                                alike deliver polished, professional products that users love.
+                            </p>
+                            <div class="flex items-center space-x-8">
+                                <div class="text-center">
+                                    <div class="text-3xl font-bold text-cyan-600">500+</div>
+                                    <div class="text-gray-600">Projects Tested</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-3xl font-bold text-purple-600">99%</div>
+                                    <div class="text-gray-600">Client Satisfaction</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-3xl font-bold text-pink-600">6</div>
+                                    <div class="text-gray-600">Years Experience</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-200">
+                            <div class="text-center">
+                                <div class="text-6xl mb-6">🎯</div>
+                                <h3 class="text-2xl font-bold text-gray-900 mb-4">Our Mission</h3>
+                                <p class="text-gray-700 text-lg leading-relaxed">
+                                    To empower developers with comprehensive quality assurance services that ensure 
+                                    every release meets the highest standards of functionality, performance, and user experience.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Our Values -->
+            <section class="py-20 px-4 bg-white">
+                <div class="max-w-7xl mx-auto">
+                    <h2 class="text-4xl font-bold text-gray-900 text-center mb-4">Our Values</h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto text-center mb-16">
+                        The principles that guide everything we do
+                    </p>
+                    
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 text-center">
+                            <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl text-white">🔍</div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-4">Attention to Detail</h3>
+                            <p class="text-gray-600">We believe that perfection lies in the details. Every pixel, every interaction, every edge case matters.</p>
+                        </div>
+
+                        <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 text-center">
+                            <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl text-white">🤝</div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-4">Partnership</h3>
+                            <p class="text-gray-600">We're not just testers; we're your partners in success, working closely with your team to achieve excellence.</p>
+                        </div>
+
+                        <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 text-center">
+                            <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-teal-500 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl text-white">⚡</div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-4">Innovation</h3>
+                            <p class="text-gray-600">We continuously evolve our testing methodologies to stay ahead of industry trends and challenges.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Our Team -->
+            <section class="py-20 px-4 bg-gray-50">
+                <div class="max-w-7xl mx-auto">
+                    <h2 class="text-4xl font-bold text-gray-900 text-center mb-4">Meet Our Expert Team</h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto text-center mb-16">
+                        Experienced professionals dedicated to your success
+                    </p>
+                    
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="bg-white rounded-xl p-6 shadow-lg border border-gray-200 text-center">
+                            <div class="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl">👨‍💻</div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Alex Chen</h3>
+                            <p class="text-purple-600 mb-3">Lead QA Engineer</p>
+                            <p class="text-gray-600 text-sm">10+ years in game testing with expertise in automation and performance optimization.</p>
+                        </div>
+
+                        <div class="bg-white rounded-xl p-6 shadow-lg border border-gray-200 text-center">
+                            <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl">👩‍💻</div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Sarah Martinez</h3>
+                            <p class="text-blue-600 mb-3">UX Testing Specialist</p>
+                            <p class="text-gray-600 text-sm">Expert in usability testing and accessibility compliance with a focus on user-centered design.</p>
+                        </div>
+
+                        <div class="bg-white rounded-xl p-6 shadow-lg border border-gray-200 text-center">
+                            <div class="w-20 h-20 bg-gradient-to-br from-cyan-500 to-green-500 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl">👨‍💻</div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Mike Johnson</h3>
+                            <p class="text-cyan-600 mb-3">Mobile QA Lead</p>
+                            <p class="text-gray-600 text-sm">Specializes in mobile game testing across iOS and Android platforms with deep device compatibility knowledge.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Why Choose Us -->
+            <section class="py-20 px-4 bg-white">
+                <div class="max-w-7xl mx-auto">
+                    <h2 class="text-4xl font-bold text-gray-900 text-center mb-4">Why Choose Perfect Proof?</h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto text-center mb-16">
+                        We deliver exceptional quality assurance with proven results
+                    </p>
+                    
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <div class="text-center">
+                            <div class="bg-white rounded-xl p-6 shadow-lg border border-gray-200">
+                                <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl text-white">🚀</div>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Fast Turnaround</h3>
+                                <p class="text-gray-600 text-sm">Quick testing cycles that keep your project on schedule</p>
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                            <div class="bg-white rounded-xl p-6 shadow-lg border border-gray-200">
+                                <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl text-white">📊</div>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Detailed Reports</h3>
+                                <p class="text-gray-600 text-sm">Comprehensive bug reports with clear reproduction steps</p>
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                            <div class="bg-white rounded-xl p-6 shadow-lg border border-gray-200">
+                                <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-teal-500 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl text-white">🔧</div>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Custom Solutions</h3>
+                                <p class="text-gray-600 text-sm">Tailored testing approaches for your specific needs</p>
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                            <div class="bg-white rounded-xl p-6 shadow-lg border border-gray-200">
+                                <div class="w-16 h-16 bg-gradient-to-br from-pink-500 to-purple-500 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl text-white">💬</div>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">24/7 Support</h3>
+                                <p class="text-gray-600 text-sm">Always available when you need us most</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Our Location -->
+            <section class="py-20 px-4 bg-gray-50">
+                <div class="max-w-7xl mx-auto">
+                    <h2 class="text-4xl font-bold text-gray-900 text-center mb-4">Our Location</h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto text-center mb-16">
+                        Visit us or reach out from anywhere in the world
+                    </p>
+                    
+                    <div class="grid lg:grid-cols-2 gap-12">
+                        <!-- Address Information -->
+                        <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-200">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-6">Perfect Proof Headquarters</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-start">
+                                    <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white mr-4 mt-1">
+                                        📍
+                                    </div>
+                                    <div>
+                                        <div class="font-semibold text-gray-900 mb-2">Address</div>
+                                        <div class="text-gray-700 leading-relaxed">
+                                            Perfect Proof QA Solutions<br>
+                                            1234 Innovation Drive, Suite 567<br>
+                                            Tech Valley, California 94025<br>
+                                            United States
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-white mr-4">
+                                        📧
+                                    </div>
+                                    <div>
+                                        <div class="font-semibold text-gray-900">Email</div>
+                                        <div class="text-gray-600">hello@perfectproof.com</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-teal-500 rounded-full flex items-center justify-center text-white mr-4">
+                                        📞
+                                    </div>
+                                    <div>
+                                        <div class="font-semibold text-gray-900">Phone</div>
+                                        <div class="text-gray-600">+1 (555) 123-PROOF</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 bg-gradient-to-br from-pink-500 to-purple-500 rounded-full flex items-center justify-center text-white mr-4">
+                                        ⏰
+                                    </div>
+                                    <div>
+                                        <div class="font-semibold text-gray-900">Business Hours</div>
+                                        <div class="text-gray-600">Monday - Friday: 9:00 AM - 6:00 PM PST</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Interactive Map -->
+                        <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-200">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-6">Find Us on the Map</h3>
+                            <div class="bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl h-80 flex items-center justify-center relative overflow-hidden">
+                                <!-- Map Placeholder with SVG -->
+                                <svg class="w-full h-full" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                                    <!-- Background -->
+                                    <rect width="400" height="300" fill="#f3f4f6"/>
+                                    
+                                    <!-- Streets -->
+                                    <line x1="0" y1="100" x2="400" y2="100" stroke="#d1d5db" stroke-width="3"/>
+                                    <line x1="0" y1="200" x2="400" y2="200" stroke="#d1d5db" stroke-width="3"/>
+                                    <line x1="100" y1="0" x2="100" y2="300" stroke="#d1d5db" stroke-width="3"/>
+                                    <line x1="300" y1="0" x2="300" y2="300" stroke="#d1d5db" stroke-width="3"/>
+                                    
+                                    <!-- Buildings -->
+                                    <rect x="120" y="120" width="60" height="60" fill="#e5e7eb" rx="5"/>
+                                    <rect x="220" y="120" width="60" height="60" fill="#e5e7eb" rx="5"/>
+                                    <rect x="120" y="220" width="60" height="60" fill="#e5e7eb" rx="5"/>
+                                    <rect x="220" y="220" width="60" height="60" fill="#e5e7eb" rx="5"/>
+                                    
+                                    <!-- Our Building (highlighted) -->
+                                    <rect x="170" y="170" width="60" height="60" fill="#8b5cf6" rx="5"/>
+                                    <text x="200" y="205" text-anchor="middle" fill="white" font-size="12" font-weight="bold">PP</text>
+                                    
+                                    <!-- Location Pin -->
+                                    <circle cx="200" cy="150" r="8" fill="#ec4899"/>
+                                    <circle cx="200" cy="150" r="4" fill="white"/>
+                                    
+                                    <!-- Street Labels -->
+                                    <text x="10" y="95" fill="#6b7280" font-size="10">Innovation Drive</text>
+                                    <text x="10" y="195" fill="#6b7280" font-size="10">Tech Valley Blvd</text>
+                                    <text x="105" y="15" fill="#6b7280" font-size="10" transform="rotate(90 105 15)">Silicon Ave</text>
+                                    
+                                    <!-- Compass -->
+                                    <g transform="translate(350, 30)">
+                                        <circle cx="0" cy="0" r="20" fill="white" stroke="#d1d5db" stroke-width="2"/>
+                                        <text x="0" y="-10" text-anchor="middle" fill="#374151" font-size="8">N</text>
+                                        <polygon points="0,-15 3,0 0,15 -3,0" fill="#8b5cf6"/>
+                                    </g>
+                                </svg>
+                                
+                                <!-- Map Overlay Info -->
+                                <div class="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg p-3 shadow-lg">
+                                    <div class="text-sm font-semibold text-gray-900">Perfect Proof HQ</div>
+                                    <div class="text-xs text-gray-600">1234 Innovation Drive</div>
+                                </div>
+                            </div>
+                            <div class="mt-4 text-center">
+                                <button class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-6 py-2 rounded-lg font-semibold transition-all text-sm">
+                                    Get Directions
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact CTA -->
+            <section class="py-20 px-4 bg-gradient-to-r from-purple-900 via-blue-900 to-cyan-900">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h2 class="text-4xl font-bold text-white mb-6">Ready to Work Together?</h2>
+                    <p class="text-xl text-gray-300 mb-8">
+                        Let's discuss how Perfect Proof can help ensure your next release is flawless. 
+                        Get in touch for a free consultation and see how we can elevate your project.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <button class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-4 rounded-xl font-semibold transition-all transform hover:scale-105 shadow-lg glow-effect" onclick="showPage('contact')">
+                            Start Free Consultation
+                        </button>
+                        <button class="border-2 border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-gray-900 px-8 py-4 rounded-xl font-semibold transition-all" onclick="showPage('services')">
+                            View Our Services
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- CONTACT US PAGE -->
+    <div id="contact" class="page">
+        <div class="pt-16">
+            <!-- Hero Section -->
+            <section class="hero-bg py-20 px-4 relative">
+                <div class="max-w-7xl mx-auto text-center relative z-10">
+                    <h1 class="text-5xl md:text-6xl font-bold text-white mb-6">
+                        Get in <span class="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent text-glow">Touch</span>
+                    </h1>
+                    <p class="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto">
+                        Ready to perfect your product? Let's discuss your QA needs and create a custom testing solution 
+                        that ensures your game or software launches flawlessly.
+                    </p>
+                </div>
+                
+                <!-- Floating Elements -->
+                <div class="absolute top-20 left-10 floating-element">
+                    <div class="w-16 h-16 bg-gradient-to-br from-purple-500/30 to-pink-500/30 rounded-full glow-effect"></div>
+                </div>
+                <div class="absolute top-40 right-20 floating-element" style="animation-delay: -2s;">
+                    <div class="w-12 h-12 bg-gradient-to-br from-cyan-500/30 to-blue-500/30 rounded-full glow-effect"></div>
+                </div>
+                <div class="absolute bottom-20 left-1/4 floating-element" style="animation-delay: -4s;">
+                    <div class="w-8 h-8 bg-gradient-to-br from-green-500/30 to-teal-500/30 rounded-full glow-effect"></div>
+                </div>
+            </section>
+
+            <!-- Contact Form Section -->
+            <section class="py-20 px-4 bg-gray-50">
+                <div class="max-w-7xl mx-auto">
+                    <div class="grid lg:grid-cols-2 gap-12">
+                        <!-- Contact Form -->
+                        <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-200">
+                            <h2 class="text-3xl font-bold text-gray-900 mb-6">Send Us a Message</h2>
+                            <!-- Contact/Inquiry Form Section -->
+<section id="inquiry-form">
+  <h2>Send Us Your Inquiry</h2>
+  <p>Please fill out the form below and we’ll get back to you as soon as possible.</p>
+  
+  <iframe src="https://form.jotform.com/252563706849468" 
+          width="640" 
+          height="900" 
+          frameborder="0" 
+          marginheight="0" 
+          marginwidth="0">
+    Loading…
+  </iframe>
+</section>
+
+                        </div>
+
+                        <!-- Contact Information -->
+                        <div class="space-y-8">
+                            <!-- Contact Details -->
+                            <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-200">
+                                <h3 class="text-2xl font-bold text-gray-900 mb-6">Contact Information</h3>
+                                <div class="space-y-4">
+                                    <div class="flex items-center">
+                                        <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white mr-4">
+                                            📧
+                                        </div>
+                                        <div>
+                                            <div class="font-semibold text-gray-900">Email</div>
+                                            <div class="text-gray-600">hello@perfectproof.com</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-white mr-4">
+                                            📞
+                                        </div>
+                                        <div>
+                                            <div class="font-semibold text-gray-900">Phone</div>
+                                            <div class="text-gray-600">+1 (555) 123-PROOF</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-teal-500 rounded-full flex items-center justify-center text-white mr-4">
+                                            🌍
+                                        </div>
+                                        <div>
+                                            <div class="font-semibold text-gray-900">Location</div>
+                                            <div class="text-gray-600">Global Remote Team</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="w-12 h-12 bg-gradient-to-br from-pink-500 to-purple-500 rounded-full flex items-center justify-center text-white mr-4">
+                                            ⏰
+                                        </div>
+                                        <div>
+                                            <div class="font-semibold text-gray-900">Response Time</div>
+                                            <div class="text-gray-600">Within 24 hours</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        
+
+                            <!-- FAQ -->
+                            <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-200">
+                                <h3 class="text-2xl font-bold text-gray-900 mb-6">Quick FAQ</h3>
+                                <div class="space-y-4">
+                                    <div>
+                                        <div class="font-semibold text-gray-900 mb-1">How much does testing cost?</div>
+                                        <div class="text-gray-600 text-sm">Pricing varies by project scope. We provide free quotes after understanding your needs.</div>
+                                    </div>
+                                    <div>
+                                        <div class="font-semibold text-gray-900 mb-1">How long does testing take?</div>
+                                        <div class="text-gray-600 text-sm">Timeline depends on project complexity, typically 1-4 weeks for most projects.</div>
+                                    </div>
+                                    <div>
+                                        <div class="font-semibold text-gray-900 mb-1">Do you test all platforms?</div>
+                                        <div class="text-gray-600 text-sm">Yes! We test on PC, mobile, console, web, and VR/AR platforms.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        let currentPage = 'home';
+
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            
+            // Show selected page
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+                currentPage = pageId;
+                
+                // Update navigation
+                updateNavigation(pageId);
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+            }
+        }
+
+        function showSubService(serviceId) {
+            showPage(serviceId);
+        }
+
+        function updateNavigation(activePageId) {
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                const href = link.getAttribute('onclick');
+                if (href && href.includes(activePageId)) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // Initialize navigation on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateNavigation('home');
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97ef5b8b5358e084',t:'MTc1Nzg0NzM4NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
