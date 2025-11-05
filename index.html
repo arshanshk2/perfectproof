@@ -1971,26 +1971,6 @@
   </div>
 </section>
 
-<script>
-document.getElementById('contactForm').addEventListener('submit', async function(e) {
-  e.preventDefault();
-  const formData = new FormData(this);
-  const data = Object.fromEntries(formData.entries());
-
-  const response = await fetch('YOUR_WEB_APP_URL', {  // 👈 Replace with Google Script URL
-    method: 'POST',
-    body: JSON.stringify(data),
-    headers: { 'Content-Type': 'application/json' }
-  });
-
-  if (response.ok) {
-    document.getElementById('formResponse').classList.remove('hidden');
-    this.reset();
-  } else {
-    alert('Error sending message. Please try again.');
-  }
-});
-</script>
 
 
 
@@ -2036,7 +2016,7 @@ document.getElementById('contactForm').addEventListener('submit', async function
       </footer>
     </div>
   </div>
-
+<!-- 
     <script>
         let currentPage = 'home';
 
@@ -2078,6 +2058,186 @@ document.getElementById('contactForm').addEventListener('submit', async function
         document.addEventListener('DOMContentLoaded', function() {
             updateNavigation('home');
         });
-    </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97ef5b8b5358e084',t:'MTc1Nzg0NzM4NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+    </script> -->
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97ef5b8b5358e084',t:'MTc1Nzg0NzM4NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+<script>
+class FormHandler {
+  constructor() {
+    this.scriptURL = 'https://script.google.com/macros/s/AKfycbwq2WvOlpaiONsXQXjTetkjV0p-e11K5UCLQQvWKQQc/dev';
+    this.init();
+  }
+
+  init() {
+    const form = document.getElementById('contactForm');
+    if (form) {
+      form.addEventListener('submit', (e) => this.handleSubmit(e));
+    }
+  }
+
+  validateForm(data) {
+    const errors = [];
+    
+    if (!data.name || data.name.trim().length < 2) {
+      errors.push('Name must be at least 2 characters long');
+    }
+    
+    if (!data.email || !this.isValidEmail(data.email)) {
+      errors.push('Please enter a valid email address');
+    }
+    
+    if (!data.summary || data.summary.trim().length < 10) {
+      errors.push('Please provide a detailed project summary (at least 10 characters)');
+    }
+    
+    return errors;
+  }
+
+  isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+
+  async handleSubmit(e) {
+    e.preventDefault();
+    
+    const form = e.target;
+    const formData = new FormData(form);
+    const data = {
+      name: formData.get('name')?.trim() || '',
+      company: formData.get('company')?.trim() || '',
+      location: formData.get('location')?.trim() || '',
+      phone: formData.get('phone')?.trim() || '',
+      email: formData.get('email')?.trim() || '',
+      summary: formData.get('summary')?.trim() || '',
+      timestamp: new Date().toISOString(),
+      source: 'PerfectProof Website'
+    };
+
+    // Validate form
+    const errors = this.validateForm(data);
+    if (errors.length > 0) {
+      this.showMessage(errors.join(', '), 'error');
+      return;
+    }
+
+    await this.submitForm(data, form);
+  }
+
+  async submitForm(data, form) {
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    
+    this.setButtonState(submitBtn, 'Sending...', true);
+
+    try {
+      const response = await fetch(this.scriptURL, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      
+      if (result.result === 'success') {
+        this.showMessage('Message sent successfully! We\'ll get back to you within 24 hours.', 'success');
+        form.reset();
+        
+        // Track conversion (optional)
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'form_submission', {
+            'event_category': 'contact',
+            'event_label': 'contact_form'
+          });
+        }
+      } else {
+        throw new Error(result.error || 'Unknown error occurred');
+      }
+      
+    } catch (error) {
+      console.error('Form submission error:', error);
+      this.showMessage('Sorry, there was an error sending your message. Please try again or contact us directly at contact@perfectproof.in', 'error');
+    } finally {
+      this.setButtonState(submitBtn, originalText, false);
+    }
+  }
+
+  setButtonState(button, text, disabled) {
+    button.textContent = text;
+    button.disabled = disabled;
+    
+    if (disabled) {
+      button.classList.add('opacity-50', 'cursor-not-allowed');
+    } else {
+      button.classList.remove('opacity-50', 'cursor-not-allowed');
+    }
+  }
+
+  showMessage(message, type) {
+    const responseEl = document.getElementById('formResponse');
+    if (!responseEl) return;
+
+    responseEl.textContent = message;
+    responseEl.classList.remove('hidden', 'text-green-400', 'text-red-400');
+    
+    if (type === 'success') {
+      responseEl.classList.add('text-green-400');
+    } else {
+      responseEl.classList.add('text-red-400');
+    }
+
+    // Auto-hide success messages after 5 seconds
+    if (type === 'success') {
+      setTimeout(() => {
+        responseEl.classList.add('hidden');
+      }, 5000);
+    }
+  }
+}
+
+// Initialize form handler when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+  new FormHandler();
+  
+  // Initialize page navigation
+  updateNavigation('home');
+});
+
+// Your existing page navigation functions
+let currentPage = 'home';
+
+function showPage(pageId) {
+  const pages = document.querySelectorAll('.page');
+  pages.forEach(page => page.classList.remove('active'));
+  
+  const targetPage = document.getElementById(pageId);
+  if (targetPage) {
+    targetPage.classList.add('active');
+    currentPage = pageId;
+    updateNavigation(pageId);
+    window.scrollTo(0, 0);
+  }
+}
+
+function showSubService(serviceId) {
+  showPage(serviceId);
+}
+
+function updateNavigation(activePageId) {
+  const navLinks = document.querySelectorAll('.nav-link');
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    const href = link.getAttribute('onclick');
+    if (href && href.includes(activePageId)) {
+      link.classList.add('active');
+    }
+  });
+}
+</script>
+</body>
 </html>
